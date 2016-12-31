@@ -1,5 +1,3 @@
-fa4c6bade4970c282b3870ad16f1bde8164663a9
-
 GIT - Version Control System
 GitHub - Code sharing and collaboration platform
 
@@ -90,5 +88,3 @@ Now that you have your workspace set up, what do you want to try using Git for?
   Create project with multiple files.
   Edit and save them when needed.
   Explore them and find bugs.
-  
-
