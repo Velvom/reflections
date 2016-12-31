@@ -1,0 +1,97 @@
+1. What happens when you initialize a repository? Why do you need to do it?
+An empty repo is initialized in the directory. The .git directory gets created.
+Git repos store a bunch of meta data about the history of the repo since it was created. (the .git file. Use ls -a to see it in a repo).
+
+- To create a new repo (from a directory with files)
+git init
+
+- 'git status' shows what files have changed since the last commit.
+
+This needs to be done if we would want to merge and branch out our changes. 
+
+2. How is the staging area different from the working directory and the repository?
+What value do you think it offers?
+Staging area is an intermediate areas between working dir and the repo.
+It allows us to stage the logical set of files that need to be committed in a
+single commit.
+
+- To stage
+git add <file>
+
+- To unstage file
+git rm --cached lesson2_reflections.txt
+git reset lesson_2_reflections.txt
+git rm -f --cached lesson2_reflections.txt if changes were made after staging
+
+
+3. How can you use the staging area to make sure you have one commit per logical
+change?
+By adding only files pertinent to a logical change to the staging area.
+
+- To commit
+git commit.This should bring up an editor (that was setup) for us to enter a
+commit message.
+- To commit with a command line commit message
+git commit -m "Commit message"
+- To see the commit ID
+git log
+Note: commit ID and change ID are different
+
+- To diff between working dir and staging area
+git diff
+- To diff between staging area and repository
+git diff --staged
+- To diff between two commits
+git diff commitID1 commitID2
+- To discard any changes in staging area or working dir.
+git reset --hard
+NOTE: Be wary....this is an irreversible command since nothing is committed in
+working dir or staging area. Once it's reset, we can't recover what's just lost.
+
+What are some situations when branches would be helpful in keeping your history
+organized? How would branches help?
+Every time we create a repo, Git creates a master branch for us. But, there are
+situations where we would want to branch out from master and work in isolation
+for a while. For example, an experimental feature. Keep the master branch that is production quality and never breaks.
+
+- To create a new branch
+git branch <new branch>
+- To switch to a diff branch
+git checkout <new branch>
+- To create and switch to that branch
+git checkout -b <branch>
+
+How do the diagrams help you visualize the branch structure?
+This will show the commit history in each branch.
+git log --graph --oneline <branch1> <branch2>
+
+The digrams show different branches and help trace the parents of each commit. And, it helps locate unreachable commits.
+
+What is the result of merging two branches together? Why do we represent it in
+the diagram the way we do?
+The process of combining two commits is called merging. Changes from both branches are merged. When merging a new node is created with the label of the branch into which merge is done.
+- To merge a branch to master
+git merge master <branch>
+- If merge fails, restore your files to their state before you started the merge by running
+git merge --abort
+- Also, we can run a merge preview before the actual run.
+- git merge --preview
+- To see the paranet of a commit after merge
+git show <commit ID>
+- To delete the branch that is not needed any longer
+git branch -d <branch name>
+- To resolve conflicts
+git merge master easy-mode
+resolve the conflicts manually
+Run 'git status' to see if there is unmerged paths. If so,
+git add <file(s)>
+Run 'git status' again. You will see "All conflicts fixed but you are still merging."
+git commit <file(s)>
+To show the last merge commit:
+git log -n 1
+
+
+What are the pros and cons of Git's automatic merging vs. always doing merges
+manually?
+Manual: can pick the truly required changes, but prone to human error. Also, some cases are cumbersome.
+Automatic: Faster, merge itself is less error prone. But, may not contain the desired changes.
